@@ -1,4 +1,3 @@
-llms=input("Enter A.I from which you want to use  so select and write exact from here:-{'ChatGPT','Grok','Perplexity','Gemini','GeminiAIMode','Mistral'}:")
 from pdf2image import convert_from_path
 from PIL import Image
 from sentence_transformers import SentenceTransformer
@@ -6,7 +5,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_classic.chains import RetrievalQA
-from npmai import ChatGPT,Perplexity,Grok,Gemini
+from npmai import Ollama
 import numpy as np
 import pytesseract
 import fitz
@@ -97,7 +96,10 @@ else:
 
 retriever=vector_db.as_retriever()
 
-llm=globals()[llms]()
+llm=Ollama(
+    model="llama3.2",
+    temperature=0.8
+)
 
 qa=RetrievalQA.from_chain_type(
     llm=llm,
