@@ -63,6 +63,11 @@ def ocr(path,lang="eng"):
     full = pytesseract.image_to_string(pil, lang=lang, config='--psm 6')
     return full
 
+def text_processes(path):
+    with open(path,"r") as f:
+        text=f.read()
+        return text
+
 def ingest_file(path):
     if path.endswith(".pdf") and path.lower().endswith(".pdf"):
         if pdf_has_text(path):
@@ -71,6 +76,8 @@ def ingest_file(path):
             return pdf_scanned_to_text(path)
     elif any(path.lower().endswith(ext) for ext in ('.png','.jpg','.jpeg')):
              return ocr(path)
+    elif path.lower().endswith(".txt"):
+        return text_processes(path)
 
 emb=HuggingFaceEmbeddings(model_name="BAAI/bge-large-en-v1.5")
 
