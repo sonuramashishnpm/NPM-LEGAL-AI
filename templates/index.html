@@ -27,13 +27,7 @@
 
     <label>Upload Image</label>
     <input type="file" id="image_file" accept=".png,.jpg,.jpeg">
-
-    <label>YouTube Link</label>
-    <input id="link" placeholder="Enter YouTube video link">
-
-    <label>Upload Local Video</label>
-    <input type="file" id="video_file" accept=".mp4">
-
+    
     <label>Knowledge Base Name</label>
     <input id="db" placeholder="Knowledge Base Name">
 
@@ -51,10 +45,8 @@ async function ask() {
 
   const pdf = pdf_file.files[0];
   const img = image_file.files[0];
-  const vid = video_file.files[0];
-  const yt  = link.value.trim();
 
-  let sources = [pdf, img, vid, yt].filter(x => x);
+  let sources = [pdf, img].filter(x => x);
 
   if (sources.length === 0) {
     alert("Please provide ONE source");
@@ -76,12 +68,7 @@ async function ask() {
 
   if (pdf) fd.append("file", pdf);
   else if (img) fd.append("file", img);
-  else if (vid) fd.append("file", vid);
-  else if (yt) {
-    fd.append("link", yt);
-    fd.append("output_path", "yt_video.mp4"); // REQUIRED
-  }
-
+  
   response.innerText = "Thinking...";
 
   const res = await fetch("/ask", {
@@ -96,4 +83,5 @@ async function ask() {
 
 </body>
 </html>
+
 
