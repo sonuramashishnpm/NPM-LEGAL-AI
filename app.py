@@ -23,10 +23,6 @@ def ask():
         f = request.files["file"]
         files["file"] = (f.filename, f.stream, f.mimetype)
 
-    if request.form.get("link"):
-        data["link"] = request.form.get("link")
-        data["output_path"] = request.form.get("output_path")
-
     res = requests.post(
         HF_API,
         data=data,
