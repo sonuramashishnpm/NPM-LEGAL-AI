@@ -69,7 +69,7 @@ def ask():
         HF_API,
         data=data,
         files=files if files else None,
-        timeout=300
+        timeout=600
     )
     response = str(result)
     memory.save_context(data, response)
