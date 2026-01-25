@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, session
+from npmai import Memory
 import requests
 import json
 import uuid
@@ -16,29 +17,7 @@ def index():
     if 'user_id' not in session:
         session['user_id'] = str(uuid.uuid4())
     return render_template("index.html")
-
-class Memory:
-    def __init__(self, user_id):
-        self.filename = f"memory_{user_id}.json"
-
-    def save_context(self, user_input, ai_output):
-        with open(self.filename, "a") as data:
-            json.dump({"Human": user_input, "AI": ai_output}, data)
-            data.write("\n")
-
-    def load_memory_variables(self):
-        string_history = ""
-        if os.path.exists(self.filename) and os.path.getsize(self.filename) > 0:
-            with open(self.filename, "r") as data:
-                for line in data:
-                    try:
-                        ldata = json.loads(line)
-                        string_history += f"Human: {ldata['Human']}\nAI: {ldata['AI']}\n"
-                    except json.JSONDecodeError:
-                        continue
-        return string_history
         
-
 @app.route("/ask", methods=["POST"])
 def ask():
     user_id = session.get('user_id', str(uuid.uuid4()))
