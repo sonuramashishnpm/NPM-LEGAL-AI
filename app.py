@@ -71,7 +71,7 @@ def ask():
         files=files if files else None,
         timeout=600
     )
-    response = str(result)
+    response = str(res)
     memory.save_context(data, response)
 
     return jsonify({"response": res.json().get("response")})
