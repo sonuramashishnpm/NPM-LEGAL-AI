@@ -76,6 +76,9 @@ async function ask() {
   fd.append("DB_PATH", db.value);
   fd.append("query", question.value);
 
+  appendMessage("You", question.value);
+    inputField.value = ""; 
+
   if (pdf) fd.append("file", pdf);
   else if (img) fd.append("file", img);
 
@@ -93,6 +96,7 @@ async function ask() {
 
 </body>
 </html>
+
 
 
 
