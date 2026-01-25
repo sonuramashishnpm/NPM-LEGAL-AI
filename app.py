@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template, session
 import requests
-import josn
+import json
 import uuid
 import os
 
