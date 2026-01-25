@@ -6,6 +6,8 @@ import os
 
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "26b14056a018e085068330a3283ec2f92c22abe18631a789750f2610e5eebbb0")
+
 
 HF_API = "https://sonuramashish22028704-npmeduai.hf.space/ingestion"
 
