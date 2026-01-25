@@ -41,6 +41,15 @@
 
 </main>
 <script>
+function appendMessage(role, text) {
+  const chatBox = document.getElementById("chat-box");
+  const msgDiv = document.createElement("div");
+  msgDiv.style.marginBottom = "15px";
+  msgDiv.innerHTML = `<strong>${role}:</strong> ${text}`;
+  chatBox.appendChild(msgDiv);
+  chatBox.scrollTop = chatBox.scrollHeight; 
+}
+  
 async function ask() {
   const fd = new FormData();
 
@@ -78,12 +87,15 @@ async function ask() {
   });
 
   const j = await res.json();
-  response.innerText = j.response;
+
+  appendMessage("AI", j.response);
+
 }
 </script>
 
 </body>
 </html>
+
 
 
 
