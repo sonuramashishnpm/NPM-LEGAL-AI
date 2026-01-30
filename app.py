@@ -34,6 +34,8 @@ def ask():
     4.Do not provide probable type data"""
     data["query"] = request.form.get("query")
     data["DB_PATH"] = request.form.get("DB_PATH")
+    data["temperature"] = 0.5
+    data["model"] = "llama3.2"
 
     # Optional
     if "file" in request.files:
@@ -48,8 +50,6 @@ def ask():
     model="llama3.2"
     res = requests.post(
         HF_API,
-        temperature=temperature
-        model=model
         data=data,
         files=files if files else None,
         timeout=600
